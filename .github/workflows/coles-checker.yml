@@ -1,26 +1,26 @@
-name: Coles Nongshim Checker
+# name: Coles Nongshim Checker
 
-on:
-  schedule:
-    - cron: '*/6 * * * *'
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: '*/6 * * * *'
+#   workflow_dispatch:
 
-jobs:
-  check-availability:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+# jobs:
+#   check-availability:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.x'
 
-      - name: Install dependencies
-        run: pip install requests
+#       - name: Install dependencies
+#         run: pip install requests
 
-      - name: Run checker
-        env:
-          WXPUSHER_TOKEN: ${{ secrets.WXPUSHER_TOKEN }}
-        run: python nongshim-checker.py
+#       - name: Run checker
+#         env:
+#           WXPUSHER_TOKEN: ${{ secrets.WXPUSHER_TOKEN }}
+#         run: python nongshim-checker.py
