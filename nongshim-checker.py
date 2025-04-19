@@ -1,5 +1,4 @@
 import requests
-import time
 import os
 
 def send_wxpusher_notification():
@@ -36,8 +35,15 @@ def check_availability():
     }
     response = requests.get(url, headers=headers)
     print(f"Response Code: {response.status_code}")
-    if response.status_code == 200:
-        data = response.json()
+    content_type = response.headers.get("Content-Type", "")
+    if response.status_code == 200 and "application/json" in content_type:
+        try:
+            data = response.json()
+        except Exception as e:
+            print(f"Failed to parse JSON: {e}")
+            print("Response text for debugging:")
+            print(response.text)
+            return
         available = data.get("pageProps", {}).get("product", {}).get("availability", None)
         print(f"Available: {available}")
         if available:
@@ -45,6 +51,8 @@ def check_availability():
             send_wxpusher_notification()
     else:
         print(f"Failed to fetch data: {response.status_code}")
+        print("Response headers:", response.headers)
+        print("Response text:", response.text)
 
 print("Starting Coles product availability checker...")
 check_availability()
