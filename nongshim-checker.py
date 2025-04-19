@@ -1,5 +1,7 @@
 import requests
 import os
+import time
+import random
 
 def send_wxpusher_notification():
     """
@@ -93,5 +95,9 @@ def check_availability():
         print("Response headers:", response.headers)
         print("Response text:", response.text)
 
-print("Starting Coles product availability checker...")
-check_availability()
+if __name__ == "__main__":
+    print("Starting Coles product availability checker...")
+    while True:
+        check_availability()
+        sleep_time = random.randint(55, 65)
+        time.sleep(sleep_time)
