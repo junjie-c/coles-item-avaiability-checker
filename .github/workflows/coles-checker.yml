@@ -21,4 +21,6 @@ jobs:
         run: pip install requests
 
       - name: Run checker
+        env:
+          WXPUSHER_TOKEN: ${{ secrets.WXPUSHER_TOKEN }}
         run: python nongshim-checker.py
